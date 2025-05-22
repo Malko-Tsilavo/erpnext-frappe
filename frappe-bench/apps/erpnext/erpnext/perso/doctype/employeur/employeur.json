@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-30 14:26:12.206790",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_lrqb",
+  "hu_hu"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_lrqb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hu_hu",
+   "fieldtype": "Data",
+   "label": "hu hu"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-04-30 14:42:42.835220",
+ "modified_by": "Administrator",
+ "module": "perso",
+ "name": "Employeur",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

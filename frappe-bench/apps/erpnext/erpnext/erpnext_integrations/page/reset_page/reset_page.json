@@ -1,0 +1,19 @@
+{
+ "content": null,
+ "creation": "2025-04-24 13:25:14.645108",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-04-24 13:25:14.645108",
+ "modified_by": "Administrator",
+ "module": "ERPNext Integrations",
+ "name": "reset-page",
+ "owner": "Administrator",
+ "page_name": "reset-page",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "reset"
+}

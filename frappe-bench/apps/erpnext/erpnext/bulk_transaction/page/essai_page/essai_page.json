@@ -1,0 +1,24 @@
+{
+ "content": null,
+ "creation": "2025-04-23 14:00:40.877423",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-04-23 14:00:40.877423",
+ "modified_by": "Administrator",
+ "module": "Bulk Transaction",
+ "name": "essai-page",
+ "owner": "Administrator",
+ "page_name": "essai-page",
+ "restrict_to_domain": "Manufacturing",
+ "roles": [
+  {
+   "role": "Academics User"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "The Page"
+}
