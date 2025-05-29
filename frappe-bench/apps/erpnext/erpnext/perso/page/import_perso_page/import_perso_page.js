@@ -1,16 +1,21 @@
 frappe.pages['import-perso-page'].on_page_load = function(wrapper) {
     const page = frappe.ui.make_app_page({
         parent: wrapper,
-        title: 'Importation personnalisée',
+        title: 'Importation Globale',
         single_column: true
     });
 
     let $content = $(`
         <div style="text-align: center; padding: 50px;">
-            <h1>Importer un fichier CSV</h1>
-            <input type="file" id="csv-file" accept=".csv" style="margin-top: 20px;" />
+            <h1>Importer tous les fichiers CSV</h1>
             <div style="margin-top: 20px;">
-                <button class="btn btn-success" id="btn-import">Importer</button>
+                <label for="csv-supplier">Fichier CSV Fournisseurs :</label>
+                <input type="file" id="csv-supplier" accept=".csv" style="margin-bottom: 10px;" /><br>
+                <label for="csv-material">Fichier CSV Demandes de Matériel :</label>
+                <input type="file" id="csv-material" accept=".csv" style="margin-bottom: 10px;" /><br>
+                <label for="csv-quotation">Fichier CSV Demandes de Devis :</label>
+                <input type="file" id="csv-quotation" accept=".csv" style="margin-bottom: 10px;" /><br>
+                <button class="btn btn-success" id="btn-import">Importer Tout</button>
             </div>
         </div>
     `);
@@ -18,57 +23,81 @@ frappe.pages['import-perso-page'].on_page_load = function(wrapper) {
     page.main.html($content);
 
     $content.find('#btn-import').on('click', function () {
-        const fileInput = document.getElementById('csv-file');
-        if (!fileInput.files.length) {
-            frappe.msgprint(__('Veuillez sélectionner un fichier CSV.'));
+        const supplierInput = document.getElementById('csv-supplier');
+        const materialInput = document.getElementById('csv-material');
+        const quotationInput = document.getElementById('csv-quotation');
+
+        if (!supplierInput.files.length || !materialInput.files.length || !quotationInput.files.length) {
+            frappe.msgprint(__('Veuillez sélectionner tous les fichiers CSV (fournisseurs, demandes de matériel, demandes de devis).'));
             return;
         }
 
-        const file = fileInput.files[0];
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("is_private", 0);
+        const supplierFile = supplierInput.files[0];
+        const materialFile = materialInput.files[0];
+        const quotationFile = quotationInput.files[0];
 
-        frappe.show_progress("Upload en cours", 30, 100, "Chargement...");
+        // Uploader les fichiers un par un
+        frappe.show_progress("Upload en cours", 0, 100, "Chargement des fichiers...");
 
-        // Upload via Frappe API
-        fetch("/api/method/upload_file", {
-            method: "POST",
-            body: formData,
-            headers: {
-                "X-Frappe-CSRF-Token": frappe.csrf_token
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
+        const uploadFile = (file) => {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("is_private", 0);
+
+            return fetch("/api/method/upload_file", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-Frappe-CSRF-Token": frappe.csrf_token
+                }
+            }).then(res => res.json());
+        };
+
+        Promise.all([
+            uploadFile(supplierFile),
+            uploadFile(materialFile),
+            uploadFile(quotationFile)
+        ])
+        .then(([supplierRes, materialRes, quotationRes]) => {
             frappe.hide_progress();
 
-            if (res.message && res.message.file_url) {
-                const file_url = res.message.file_url;
+            const supplierUrl = supplierRes.message?.file_url;
+            const materialUrl = materialRes.message?.file_url;
+            const quotationUrl = quotationRes.message?.file_url;
 
-                // Appel à ta fonction Python
-                frappe.call({
-                    method: "erpnext.api.util.importer_csv_sql_complet",  // adapte selon ton chemin réel
-                    args: { file_url },
-                    callback: function(r) {
-                        frappe.msgprint({
-                            title: r.message.status === "success" ? "Succès" : "Erreur",
-                            message: r.message.message,
-                            indicator: r.message.status === "success" ? "green" : "red"
-                        });
-                    }
-                });
-            } else {
+            if (!supplierUrl || !materialUrl || !quotationUrl) {
                 frappe.msgprint({
                     title: "Erreur",
-                    message: "Le fichier n'a pas été uploadé correctement.",
+                    message: "Un ou plusieurs fichiers n'ont pas été uploadés correctement.",
                     indicator: "red"
                 });
+                return;
             }
+
+            // Appeler import_generals
+            frappe.call({
+                method: "erpnext.api.import_general.import_generals",
+                args: {
+                    csv_supplier: supplierUrl,
+                    csv_material: materialUrl,
+                    csv_supplier_quotation: quotationUrl
+                },
+                callback: function(r) {
+                    frappe.msgprint({
+                        title: r.message.status === "success" ? "Succès" : "Erreur",
+                        message: r.message.message,
+                        indicator: r.message.status === "success" ? "green" : "red"
+                    });
+                }
+            });
         })
         .catch(err => {
             frappe.hide_progress();
-            frappe.msgprint("Erreur lors de l'upload : " + err.message);
+            frappe.msgprint({
+                title: "Erreur",
+                message: "Erreur lors de l'upload des fichiers : " + err.message,
+                indicator: "red"
+            });
         });
     });
 };

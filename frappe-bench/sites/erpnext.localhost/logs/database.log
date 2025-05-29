@@ -1862,3 +1862,7 @@ index creation(creation))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
+2025-05-29 11:16:08,157 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` ADD COLUMN `ref` text
+2025-05-29 11:16:08,184 WARNING database DDL Query made to DB:
+ALTER TABLE `tabMaterial Request` MODIFY `per_ordered` decimal(21,9) NOT NULL DEFAULT 0.0, MODIFY `per_received` decimal(21,9) NOT NULL DEFAULT 0.0

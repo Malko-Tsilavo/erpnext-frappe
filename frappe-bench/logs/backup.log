@@ -70,3 +70,33 @@ Backup Summary for erpnext.localhost at 2025-05-21 12:00:03.498959
 Config  : /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250521_120002-erpnext_localhost-site_config_backup.json 149.0B
 Database: /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250521_120002-erpnext_localhost-database.sql.gz 873.8KiB
 Backup for Site erpnext.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_c5868054f7d55e09 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c5868054f7d55e09 | /usr/bin/gzip >> ./erpnext.localhost/private/backups/20250523_130024-erpnext_localhost-database.sql.gz
+
+Backup Summary for erpnext.localhost at 2025-05-23 13:00:28.885693
+Config  : /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250523_130024-erpnext_localhost-site_config_backup.json 149.0B
+Database: /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250523_130024-erpnext_localhost-database.sql.gz 877.5KiB
+Backup for Site erpnext.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_c5868054f7d55e09 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c5868054f7d55e09 | /usr/bin/gzip >> ./erpnext.localhost/private/backups/20250523_180003-erpnext_localhost-database.sql.gz
+
+Backup Summary for erpnext.localhost at 2025-05-23 18:00:04.561223
+Config  : /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250523_180003-erpnext_localhost-site_config_backup.json 149.0B
+Database: /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250523_180003-erpnext_localhost-database.sql.gz 879.8KiB
+Backup for Site erpnext.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_c5868054f7d55e09 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c5868054f7d55e09 | /usr/bin/gzip >> ./erpnext.localhost/private/backups/20250526_120003-erpnext_localhost-database.sql.gz
+
+Backup Summary for erpnext.localhost at 2025-05-26 12:00:05.413578
+Config  : /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250526_120003-erpnext_localhost-site_config_backup.json 149.0B
+Database: /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250526_120003-erpnext_localhost-database.sql.gz 888.9KiB
+Backup for Site erpnext.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_c5868054f7d55e09 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c5868054f7d55e09 | /usr/bin/gzip >> ./erpnext.localhost/private/backups/20250528_120002-erpnext_localhost-database.sql.gz
+
+Backup Summary for erpnext.localhost at 2025-05-28 12:00:04.161395
+Config  : /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250528_120002-erpnext_localhost-site_config_backup.json 149.0B
+Database: /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250528_120002-erpnext_localhost-database.sql.gz 888.9KiB
+Backup for Site erpnext.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_c5868054f7d55e09 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c5868054f7d55e09 | /usr/bin/gzip >> ./erpnext.localhost/private/backups/20250529_120002-erpnext_localhost-database.sql.gz
+
+Backup Summary for erpnext.localhost at 2025-05-29 12:00:04.846357
+Config  : /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250529_120002-erpnext_localhost-site_config_backup.json 149.0B
+Database: /home/malko/frappe-bench/frappe-bench/sites/erpnext.localhost/private/backups/20250529_120002-erpnext_localhost-database.sql.gz 977.9KiB
+Backup for Site erpnext.localhost has been successfully completed
